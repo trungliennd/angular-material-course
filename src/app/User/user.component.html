@@ -1,0 +1,38 @@
+<div class="user">
+  <h2>User</h2>
+  <mat-form-field>
+    <input matInput placeholder="Search user" #input>
+  </mat-form-field>
+  <div class="spinner-container" *ngIf="dataSoure.loading$ | async">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <mat-table [dataSource]="dataSoure"
+    matSort matSortActive="id" matSortDirection="asc" matSortDisableClear>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>id</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.id}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>name</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.name}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="age">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>age</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.age}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>status</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.status}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="timeCreate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>timeCreate</mat-header-cell>
+      <mat-cell *matCellDef="let user">{{user.createdAt}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColums"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColums"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="10" [pageSize]="3"
+                 [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+
+</div>
